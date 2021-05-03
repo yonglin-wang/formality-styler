@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: antiquewhite;
+        }
+        div {
+            font-family: Arial,sans-serif;
+            padding-top:10px;
+            padding-bottom: 10px;
+        }
+        h1 {
+            color: palevioletred;
+        }
+        input[type="text"] {
+            width: 500px;
+        }
+        .dir_choice {
+            padding: 5px 20px;
+        }
+    </style>
+    <title>Formality Styler!</title>
+</head>
+
+<body style="padding: 0px 200px 100px">
+
+<div style="padding-bottom: 20px; background-color: lightblue;text-align: center">
+    <h1>Welcome to Formality Styler!</h1>
+</div>
+
+<div style="padding-top: 15px;">
+    <form autocomplete="off" action="{{ url_for('results') }}" name="get_input" method="post">
+        <h2>Your sentence</h2>
+
+        <label for="source_text">
+{#            <textarea id="source_text" name="source_text" rows="5" cols="33">#}
+{#                {{ default_query }}#}
+{#            </textarea>#}
+            <input type="text" id="source_text" name="source_text" value="{{ default_query }}">
+        </label>
+
+        <input type="submit" value="Rewrite!">
+
+        <label for="asciifolding">
+            <input {% if asciifolding %}checked{% endif %} type="checkbox" id="asciifolding" name="asciifolding" value="ascii-folding">
+            <span style="font-size: smaller">ASCII-folding</span>
+        </label>
+
+        <div id='direction_choices'>
+            <h2>Rewrite Direction</h2>
+            <label for='option-1' class='dir_choice'>
+                 <input {% if direction_choice == "from_formal" %}checked{% endif %} type='radio' name='direction_option' value='from_formal' id='aoption-1' style='margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
+                 formal ➡️ informal
+            </label>
+            <label for='option-1' class='dir_choice'>
+                 <input {% if direction_choice == "from_informal" %}checked{% endif %} type='radio' name='direction_option' value='from_informal' id='aoption-2' style='margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
+                 informal ➡️ formal
+            </label>
+            <label for='option-1' class='dir_choice'>
+                 <input {% if direction_choice == "auto" %}checked{% endif %} type='radio' name='direction_option' value='auto' id='aoption-3' style='margin-right: 10px; vertical-align: middle; margin-top: -2px;' />
+                 automatic 🤖
+            </label>
+        </div>
+    </form>
+</div>
+
+
+
+<div>
+    <h2>
+        Style Rewriter Output
+    </h2>
+</div>
+<div style="padding: 0px 50px 0px">
+    {{ output_text }}
+</div>
+
+</body>
+</html>
