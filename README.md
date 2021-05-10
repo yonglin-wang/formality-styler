@@ -1,5 +1,5 @@
-# formality-styler
- Web demo for formality classifier (fasttext model) and style transferer (tranformer model). Code includes training and deployment.
+# Formality Styler
+ Web demo for formality classifier (fasttext model) and style transferer (tranformer model trained with fairseq). Code includes training and deployment.
 
 # How to Run
 ## Prerequisites
@@ -10,7 +10,10 @@ You'll need the following packages to make sure the project runs. You should be 
 * [fairseq 0.10.2](https://pypi.org/project/fairseq/)
     * make sure ```INPUT_PROMPT``` in [consts.py](consts.py) is correct if using a different version!
 * [fold-to-ascii 1.0.2.post1](https://pypi.org/project/fold-to-ascii/)
-* [pexpect 4.7.0]()
+* [pexpect 4.7.0](https://pypi.org/project/pexpect/)
+* [web.py 0.62](https://pypi.org/project/web.py/)
+* [fasttext 0.9.2](https://pypi.org/project/fasttext/)
+* [requests 2.25.1](https://pypi.org/project/requests/)
 
 ### Required Files
 The following documents are required:
@@ -24,6 +27,14 @@ $ cd <project root>
 $ wget
 $ tar
 ```
+
+### Build Docker Image
+First, build the docker image by running
+```shell script
+cd classifier_docker
+docker build -t rewriter .
+```
+Now the docker image will be ready for classification. 
 
 ## Fairseq Model Test Run
 To make sure the fairseq model is running as expected, run the following fairseq-cli command at project root. 
@@ -56,28 +67,51 @@ H-0     -0.7625648975372314     Hi yes , world !
 D-0     -0.7625648975372314     Hi yes, world!
 P-0     -2.0801 -1.0306 -0.4909 -0.3452 -0.4730 -0.1554
 ```
-
+## Starting the System
+After the first time set up and tests are done, you can follow this section to start the system. 
+### Run Docker Container
+To start the Docker container for classifier, run:
+```shell script
+docker run -p 2500:8081 rewriter
+```
+If you wish to change the host port number, do the following:
+* go to [styler.py](./styler.py) and change the host port ```HOST_PORT``` number
+* change the docker run command to the following and run the command
+    ```shell script
+    docker run -p <HOST_PORT>:8081 rewriter
+    ```
+Now your docker will be up and listening.
 ### Open webpage
 To start the Flask App, simply run
-```
-python app.py
+```shell script
+$ python app.py
 ```
 and go to http://127.0.0.1:5000/. If you'd like to specify a port other than 5000, run 
-```
-python app.py --port <port number>
+```shell script
+$ python app.py --port <port number>
 ```
 go to http://127.0.0.1:\<port number\>/ instead. A Chrome browser is recommended over Safari for a better experience.
 
 # Project Structure
 
+
+
 # FAQ
-## Non-ASCII input?
+## Why bother with non-ASCII input?
+
+Our model and BPE tokenizer is train on a very clean corpus, in that the input sentences are all ASCII. This means that, even if we assume English-only input from the user, there might be words with diacritics (e.g. Zoë, façade) that will not be recognized by the tokenizer, and the non-ASCII word will be considered as an out-of-vocabulary token and converted into unknown tokens by the tokenizer.
+
+For example, "i think her name's Zoë" will be tokenized into "i think her name ' s Zo\<unk\>", causing the rewriter model to generate unexpected output such as "I think her name is Zoboyfriend." 
+
+Therefore, the restyler addresses this by using a technique similar to [ASCII folding filter in ElasticSearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-asciifolding-tokenfilter.html) using a Python package called [fold-to-ascii](https://pypi.org/project/fold-to-ascii/). To enable ASCII-folding, the user can check the "ASCII-folding" box on the Web UI; the input string from the user will be first and foremost ASCII-folded before being passed to the model (and the classifier if in automatic mode). 
+
+In this way, after ASCII-folding,  "i think her name's Zoë" is first folded into  "i think her name's Zoe", and then fed to the model, which generates the correct out "I think her name is Zoe."
 
 ## app.py: Address already in use
-Messages like ```[Errno 48] Address already in use``` are a classic Flask problem where the port has been occupied due to improper closing. 
+When starting [app.py](app.py), messages like ```[Errno 48] Address already in use``` can show up when the port has been occupied due to improper closing. 
 
-To close the port, 
-* Find the process occupying it with 
+To close the port, you'll need to terminate the occupying process: 
+* First, find the process occupying it with 
     ```
     $ lsof -i:<port number>
     ```
@@ -90,4 +124,4 @@ To close the port,
 # Acknowledgements
 This project cannot be realized without the generous guidance from Prof. Constantine Lignos. 
 
-The implementation details of this project is also drawn from multiple sources on the internet. 
+The implementation details of this project are also drawn from multiple sources on the internet, so thanks, modern information retrieval technology. 
