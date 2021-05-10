@@ -7,7 +7,7 @@ from time import time
 
 from flask import Flask, render_template, request
 
-from styler import Generator
+from styler import Generator, Classifier
 import consts as C
 
 begin = time()
@@ -20,6 +20,8 @@ app = Flask(__name__)
 for_inf_gen = Generator(C.FORMAL)
 # informal-formal generator
 inf_for_gen = Generator(C.INFORMAL)
+# formality classifier
+classifier = Classifier()
 
 # vars to be used across pages
 direction_choice, src_text, asciifolding = "", C.DEFAULT_QUERY, False
@@ -44,13 +46,25 @@ def results():
 
     try:
         if direction_choice == "from_formal":
+            class_result = None
             output = for_inf_gen.get_translation(src_text)
+            output_style = "Informal"
         elif direction_choice == "from_informal":
+            class_result = None
             output = inf_for_gen.get_translation(src_text)
+            output_style = "Formal"
         elif direction_choice == "auto":
-            output = "not implemented yet!"
+            class_result = classifier.predict(src_text)
+            if class_result.label == "informal":
+                output = inf_for_gen.get_translation(src_text)
+                output_style = "Formal"
+            elif class_result.label == "formal":
+                output = for_inf_gen.get_translation(src_text)
+                output_style = "Informal"
+            else:
+                raise NotImplementedError(class_result)
         else:
-            raise NotImplementedError
+            raise NotImplementedError(direction_choice)
     except ValueError:
         # if request too often, pexpect will break; use ValueError to catch this
         src_text = C.DEFAULT_QUERY
@@ -60,9 +74,11 @@ def results():
 
     return render_template("results.html",
                            default_query=src_text,
-                           output_text=output.detokenized,
+                           output=output,
                            direction_choice=direction_choice,
-                           asciifolding=asciifolding)
+                           asciifolding=asciifolding,
+                           auto_result=class_result,
+                           output_style=output_style)
 
 if __name__ == "__main__":
     # command line parser
@@ -72,8 +88,8 @@ if __name__ == "__main__":
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("--port",
                         type=int,
-                        default=5000,
-                        help="Port to start app at. Default: 5000")
+                        default=3500,
+                        help="Port to start app at. Default: 3500")
     args = parser.parse_args()
 
     # start app

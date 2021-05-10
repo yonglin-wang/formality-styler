@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
 # Author: Yonglin Wang
-# Date: 2021/4/30 10:19 PM
-
-import argparse
-
-#!/usr/bin/env python3
-# Author: Yonglin Wang
 # Date: 2021/4/24 10:52 PM
 # Put this script under project root!
 # Initiates fairseq interactive mode and generates the translation
@@ -13,14 +7,16 @@ import argparse
 import re
 import argparse
 import typing
+import json
 
+import requests
 import pexpect
 import attr
 from fold_to_ascii import fold
 
 import consts as C
 
-
+HOST_PORT = 2500
 S_PATTERN = re.compile(r"S-(\d+)\s+(.+)")
 W_PATTERN = re.compile(r"W-\d+\s+(\d+\.\d+)\s+")
 H_PATTERN = re.compile(r"H-\d+\s+-\d\.\d+\s+(.+)")
@@ -195,7 +191,37 @@ class Generator:
 #
 #     args = parser.parse_args()
 
+@attr.s(auto_attribs=True)
+class Prediction:
+    label: str = attr.ib()
+    score: float = attr.ib()
+
+class Classifier:
+    def __init__(self, port: int=HOST_PORT):
+        self.port = port
+        self.link = f"http://localhost:{self.port}/classify"
+
+        # test connection
+        test = requests.post(self.link, json={"text": "hi"})
+        if test.status_code != 200:
+            raise ValueError(f"Failed to hear back from Docker port at {self.port}; status code: {test.status_code}")
+
+    def predict(self, text: str) -> Prediction:
+        """return formality prediction of text, label and score"""
+        query_params = {"text": text}
+
+        result = requests.post(self.link, json=query_params)
+
+        print("URL:", result.url)
+        print("Status:", result.status_code)
+        print("JSON response:")
+        json_result = result.json()
+        # pretty print debug json
+        print(json.dumps(json_result, indent=2))
+        return Prediction(json_result["label"], json_result["score"])
 
 if __name__ == "__main__":
-    gen1 = Generator(C.INFORMAL)
+    # gen1 = Generator(C.INFORMAL)
     # gen2 = Generator(C.FORMAL)
+    c = Classifier()
+    result = c.predict("hello!")

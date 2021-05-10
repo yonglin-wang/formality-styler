@@ -6,7 +6,7 @@
         body {
             background-color: antiquewhite;
         }
-        div {
+        .section_div {
             font-family: Arial,sans-serif;
             padding-top:10px;
             padding-bottom: 10px;
@@ -26,18 +26,15 @@
 
 <body style="padding: 0px 200px 100px">
 
-<div style="padding-bottom: 20px; background-color: lightblue;text-align: center">
+<div style="padding-top: 10px; padding-bottom: 20px; background-color: lightblue;text-align: center">
     <h1>Welcome to Formality Styler!</h1>
 </div>
 
-<div style="padding-top: 15px;">
+<div class="section_div" style="padding-top: 15px;">
     <form autocomplete="off" action="{{ url_for('results') }}" name="get_input" method="post">
         <h2>Your sentence</h2>
 
         <label for="source_text">
-{#            <textarea id="source_text" name="source_text" rows="5" cols="33">#}
-{#                {{ default_query }}#}
-{#            </textarea>#}
             <input type="text" id="source_text" name="source_text" value="{{ default_query }}">
         </label>
 
@@ -66,15 +63,18 @@
     </form>
 </div>
 
-
-
-<div>
+<div class="section_div">
     <h2>
-        Style Rewriter Output
+        Styler Output
     </h2>
-</div>
-<div style="padding: 0px 50px 0px">
-    {{ output_text }}
+    {% if auto_result %}
+    <p>Formality Prediciton: <b>{{ auto_result.label }}</b> ({{ (100*auto_result.score) | round(2) }}% probability)</p>
+    {% endif %}
+
+    <h3>{{ output_style }} Rewrite</h3>
+    <div style="padding: 10px 10px 10px; border: thin solid black; background-color: white">
+        {{ output.detokenized }}
+    </div>
 </div>
 
 </body>
