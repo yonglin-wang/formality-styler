@@ -174,3 +174,5 @@ In the ideal world, we should be able to dockerize the entire project, but ```fa
 This project cannot be realized without the generous guidance from Prof. Constantine Lignos. 
 
 The implementation details of this project are also drawn from multiple sources on the internet, so thanks, modern information retrieval technology. 
+
+Special thanks to Xiaoyu Lu for testing out the system, probing the docker problem with ```fairseq-interactive```, and contributing examples and memes for my presentation :P
