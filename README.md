@@ -110,11 +110,12 @@ Once you open the web page (it might take a few seconds to a minute to load depe
 ![homepage](static/UI_homepage.png)
 
 # Interacting with the System
-To use the styler tool, do the following:
+To use the web-based styler tool, do the following:
 1. Type in your input sentence
 2. If your input contains non-ASCII characters, you might want to select ASCII-folding checkbox
 3. Choose your rewrite direction, or choose "automatic" to let the classifier decide your input style and choose the corresponding direction for you.
 4. Click "Rewrite!" to generate output!
+> Note: if you hit "rewrite" button too fast, the fairseq process might break, causing the webpage to restart from home page.
 
 # Project Structure
 ## Classifier
@@ -126,12 +127,12 @@ Files and code involved:
 * [styler.py](styler.py) for client-side Classifier class
 
 ## Rewriter
-To rewrite text from informal to formal or from formal to informal, we use ```fairseq-interactive``` to generate output with two transformer models, one for each direction. Interaction with the command line interface is done with ```pexpect```. 
+To rewrite text from informal to formal or from formal to informal, we use ```fairseq-interactive``` to generate output with two transformer models, one for each direction. Interaction with the fairseq CLI is done with ```pexpect```. 
 
 Files and code involved:
-* [styler.py](styler.py) for Generator class that spawns child processes and interacts with ```fairseq-interactive```
-* [data-bin](data-bin) for decoding the user input text
-* [fairseq_results](fairseq_results) for transformer models saved as .pt files
+* [styler.py](styler.py) for Generator class that wraps around a child process spawned for ```fairseq-interactive```, sends user input to it, and reads output from it
+* [data-bin](data-bin) containing dictionaries for decoding the user input text
+* [fairseq_results](fairseq_results) containing the transformer models saved as .pt files
 
 ## Web UI
 To create a web-based tool that combines the classifier and rewriter on a graphic interface, we use ```flask```.
