@@ -62,7 +62,7 @@ The program should print several lines of messages about program parameters, dic
 
 ```Type the input sentence and press return:```
 
-You should be able to type in an informal sentence, hit enter, and wait for the program to print several lines of rewrite output and probabilities, consisting of (S)ource, (W)all time, .
+You should be able to type in an informal sentence, hit enter, and wait for the program to print several lines of rewrite output and probabilities, consisting of (S)ource, (W)all time, (H)ypothesis, (D)etokenized hypothesis, and (P)osition-wise log likelihood.
 
 ### Example Interaction with Fairseq
 The example console output below shows what happens if you run the ```fairseq-interactive``` command above, wait for the ```Type the input sentence and press return:``` string to show up, and enter ```hiya, world!```.
