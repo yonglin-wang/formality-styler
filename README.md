@@ -65,7 +65,7 @@ The program should print several lines of messages about program parameters, dic
 You should be able to type in an informal sentence, hit enter, and wait for the program to print several lines of rewrite output and probabilities, consisting of (S)ource, (W)all time, .
 
 ### Example Interaction with Fairseq
-In the example below, run the command, wait for the ```Type the input sentence and press return:``` string to show up, and enter ```hiya, world!```.
+The example console output below shows what happens if you run the ```fairseq-interactive``` command above, wait for the ```Type the input sentence and press return:``` string to show up, and enter ```hiya, world!```.
 ```
 2021-05-02 23:50:53 | INFO | fairseq.tasks.translation | [informal] dictionary: 10032 types
 2021-05-02 23:50:53 | INFO | fairseq.tasks.translation | [formal] dictionary: 9792 types
