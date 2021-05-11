@@ -3,8 +3,12 @@
 
 # How to Run
 ## Prerequisites
+To save time, you can execute the following three subsections at the same time. 
 ### Python Packages
-You should be able to install the latest version of all the following packages by running the command:
+First, create a virtual environment with **Python 3.7** using either [venv](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment) or [conda](https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands) (I personally prefer conda).
+> Make sure it's **Python 3.7**!! This project uses 3.7.4 to be exact.
+
+Then, you should be able to install all the packages by running the following command, after you ```cd <project root>```:
 ```shell script
 pip install -r requirements.txt 
 ```
@@ -25,16 +29,15 @@ The following documents are required:
 * Fairseq models for both directions
 * Code file and dictionaries for Byte-pair Encoding (BPE)
 
-You can obtain the zip file containing all these document and put them in the correct structure by running the following commands at project root:
+You can obtain the zip file containing all these document and put them in the correct structure by running the following commands at project root, after you ```cd <project root>```:
 ```shell script
-cd <project root>
-wget -O fairseq_data.tar.gz https://www.dropbox.com/s/swllnfve8l6igc7/fairseq_data.tar.gz?dl=1
+wget -O fairseq_data.tar.gz https://www.dropbox.com/s/frq8l6h073jvu6w/fairseq_data.tar.gz?dl=1
 tar -xf fairseq_data.tar.gz && rm fairseq_data.tar.gz
 ```
-The script above will result in two more directories under project root, [data-bin](data-bin) and [fairseq_results](fairseq_results).
+The script above will result in one more folder under project root, [fairseq_results](fairseq_results).
 
 ### Build Docker Image
-First, [install docker](https://docs.docker.com/get-docker/) and run the Docker daemon. 
+First, if you haven't already, [install docker](https://docs.docker.com/get-docker/) and run Docker daemon (i.e. open your docker desktop client). 
 
 Then, build the docker image for the fastText classifier by running
 ```shell script
@@ -47,8 +50,8 @@ This might take a couple of minutes. Now the docker image will be ready for runn
 This section is not required for running the project, but is instead intended for testing purpose only.
 
 To test if the fairseq translation model can run as expected, run the following fairseq-cli command at project root. 
-```
-$ fairseq-interactive data-bin/informal-formal \
+```shell script
+fairseq-interactive data-bin/informal-formal \
                       --path fairseq_results/informal-formal/checkpoint_best.pt \
                       --beam 5 --source-lang informal --target-lang formal \
                       --bpe subword_nmt --bpe-codes data-bin/bpe_code \
@@ -95,11 +98,23 @@ To start the Flask App, simply run
 ```shell script
 python app.py
 ```
-and go to http://127.0.0.1:3500/. If you'd like to specify a port other than 3500, run 
+and go to http://127.0.0.1:3500/. 
+
+If you'd like to specify a port other than 3500, run 
 ```shell script
 python app.py --port <port number>
 ```
 go to http://127.0.0.1:/\<port number\>/ instead. A Chrome browser is recommended over Safari for a better experience.
+
+Once you open the web page (it might take a few seconds to a minute to load depending on your computer), you should see an interface similar to the screenshot below:
+![homepage](static/UI_homepage.png)
+
+# Interacting with the System
+To use the styler tool, do the following:
+1. Type in your input sentence
+2. If your input contains non-ASCII characters, you might want to select ASCII-folding checkbox
+3. Choose your rewrite direction, or choose "automatic" to let the classifier decide your input style and choose the corresponding direction for you.
+4. Click "Rewrite!" to generate output!
 
 # Project Structure
 ## Classifier
@@ -153,6 +168,7 @@ To close the port, you'll need to terminate the occupying process:
 Because python-based fastText refuses to install on my local machine... :( 
 
 In the ideal world, we should be able to dockerize the entire project, but ```fairseq-interactive``` does not recognize ```--path```... we'll look into it when time permits.
+> Note: Turns out I had the wrong ```fairseq-interactive``` version and it's incompatible with python 3.9. Maybe we can dockerize the entire project after all.
 
 # Acknowledgements
 This project cannot be realized without the generous guidance from Prof. Constantine Lignos. 
