@@ -1,0 +1,7 @@
+attrs==21.2.0
+fairseq==0.10.0
+Flask==1.1.2
+fold-to-ascii==1.0.2.post1
+pexpect==4.8.0
+requests==2.25.1
+web.py==0.62

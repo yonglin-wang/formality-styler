@@ -1,18 +1,24 @@
 # Formality Styler
- Web demo for formality classifier (fasttext model) and style transferer (tranformer model trained with fairseq). Code includes training and deployment.
+ Web demo for formality classifier (fasttext model) and style rewriter (tranformer model trained with fairseq). Code includes training and deployment.
 
 # How to Run
 ## Prerequisites
 ### Python Packages
-You'll need the following packages to make sure the project runs. You should be able to install the latest version of all the following packages via ```pip install <package name>```.
-* [attrs 19.2.0](https://pypi.org/project/attrs/)
+You should be able to install the latest version of all the following packages by running the command:
+```shell script
+pip install -r requirements.txt 
+```
+
+The command will install the packages you'll need to run the project, namely:
+* [attrs 21.2.0](https://pypi.org/project/attrs/)
 * [flask 1.1.2](https://flask.palletsprojects.com/en/1.1.x/)
 * [fairseq 0.10.2](https://pypi.org/project/fairseq/)
-    * make sure ```INPUT_PROMPT``` in [consts.py](consts.py) is correct if using a different version!
+    * make sure ```INPUT_PROMPT``` in [consts.py](consts.py) is exactly the same as what you see in [Fairseq test run](#fairseq-model-test-run) if using a different version!
 * [fold-to-ascii 1.0.2.post1](https://pypi.org/project/fold-to-ascii/)
 * [pexpect 4.7.0](https://pypi.org/project/pexpect/)
 * [web.py 0.62](https://pypi.org/project/web.py/)
 * [requests 2.25.1](https://pypi.org/project/requests/)
+
 
 ### Required Files
 The following documents are required:
