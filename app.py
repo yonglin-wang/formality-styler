@@ -13,9 +13,7 @@ import consts as C
 begin = time()
 app = Flask(__name__)
 
-# for debugging, informal command:
-# TODO if I hit "rewrite" button too fast, the program breaks
-# fairseq-interactive data-bin/informal-formal --path fairseq_results/informal-formal/checkpoint_best.pt --beam 5 --source-lang informal --target-lang formal --bpe subword_nmt --bpe-codes fairseq_data/bpe_output/bpe_code --tokenizer moses --moses-target-lang en  --remove-bpe
+# Note: if I hit "rewrite" button too fast, the program breaks
 # formal-informal generator
 for_inf_gen = Generator(C.FORMAL)
 # informal-formal generator

@@ -5,7 +5,6 @@
 # Initiates fairseq interactive mode and generates the translation
 
 import re
-import argparse
 import typing
 import json
 
@@ -145,51 +144,6 @@ class Generator:
 
         return out
 
-# def main():
-#     # command line parser
-#     # noinspection PyTypeChecker
-#     parser = argparse.ArgumentParser(prog="Name of Program",
-#                                      description="Program Description",
-#                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-#     parser.add_argument("positional",
-#                         type=int,
-#                         help="a positional argument")
-#     parser.add_argument('--float',
-#                         type=float,
-#                         default=0.5,
-#                         help='optional float with default of 0.5')
-#     parser.add_argument("-o", "--optional_argument",
-#                         type=str,
-#                         default=None,
-#                         help="optional argument; shorthand o")
-#     parser.add_argument("-t", "--now_true",
-#                         action="store_true",
-#                         help="boolean argument, stores true if specified, false otherwise; shorthand t")
-#
-#     args = parser.parse_args()
-
-# def main():
-#     # command line parser
-#     # noinspection PyTypeChecker
-#     parser = argparse.ArgumentParser(prog="Name of Program",
-#                                      description="Program Description",
-#                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-#     parser.add_argument("positional",
-#                         type=int,
-#                         help="a positional argument")
-#     parser.add_argument('--float',
-#                         type=float,
-#                         default=0.5,
-#                         help='optional float with default of 0.5')
-#     parser.add_argument("-o", "--optional_argument",
-#                         type=str,
-#                         default=None,
-#                         help="optional argument; shorthand o")
-#     parser.add_argument("-t", "--now_true",
-#                         action="store_true",
-#                         help="boolean argument, stores true if specified, false otherwise; shorthand t")
-#
-#     args = parser.parse_args()
 
 @attr.s(auto_attribs=True)
 class Prediction:
@@ -221,7 +175,8 @@ class Classifier:
         return Prediction(json_result["label"], json_result["score"])
 
 if __name__ == "__main__":
+    pass
     # gen1 = Generator(C.INFORMAL)
     # gen2 = Generator(C.FORMAL)
-    c = Classifier()
-    result = c.predict("hello!")
+    # c = Classifier()
+    # result = c.predict("hello!")
