@@ -72,6 +72,9 @@ def results():
                                default_query=src_text,
                                request_too_frequent=True)
 
+    # print output to console for debugging
+    print(output)
+
     return render_template("results.html",
                            default_query=src_text,
                            output=output,
