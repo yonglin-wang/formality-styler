@@ -1,5 +1,5 @@
 # Base on Python, for conda use
-FROM python:3.9
+FROM python:3.7
 
 # Order: commands changed least -> most, e.g. pip -> COPY my_file.py
 
