@@ -1,9 +1,15 @@
 # Formality Styler
-Web demo for formality classifier (fasttext model) and style rewriter (tranformer model trained with fairseq). Code includes training and deployment.
+Web demo for formality classifier (fasttext model) and style rewriter (tranformer model trained with fairseq). Code includes training and deployment. 
+
+The hope is to provide a tool for ESL students to understand formality and, in general, for every English speaker to achieve effective communication under situations with varying formality requirements.
 
 This is the Capstone Project for my Master's degree in Computational Linguistics. 
 
-**Documentations:**
+**UI demo (gif)** 
+
+![demo gif](static/UI_demo.gif)
+
+**Documentations**
 
 The presentation slides for this project can be found [here](https://docs.google.com/presentation/d/1Of4xggftqHpqkNu3ScqmyCKTcWLXGX_xYwy8eH4FVXA/edit?usp=sharing). A conference-proceeding-style writeup that briefly describes the project can be found [here](doc/project_writeup.pdf).
 
@@ -90,10 +96,16 @@ P-0     -2.0801 -1.0306 -0.4909 -0.3452 -0.4730 -0.1554
 ## Starting the System
 After the first time set up and tests are done, you can follow this section to start the system every time you wish to use the system. 
 ### Run Docker Container
-To start the Docker container for classifier, run:
-```shell script
-docker run -p 2500:8081 rewriter
-```
+To start the Docker container for classifier: 
+
+1. Make sure docker daemon is running
+
+2. Then, run:
+
+   ```bash
+   docker run -p 2500:8081 rewriter
+   ```
+
 If you wish to change the host port number, do the following:
 * go to [styler.py](./styler.py) and change the host port ```HOST_PORT``` number
 * change the docker run command to the following and run the command
@@ -112,7 +124,7 @@ If you'd like to specify a port other than 3500, run
 ```shell script
 python app.py --port <port number>
 ```
-go to http://127.0.0.1:/\<port number\>/ instead. A Chrome browser is recommended over Safari for a better experience.
+go to http://127.0.0.1:/<port number\>/ instead. A Chrome browser is recommended over Safari for a better experience.
 
 Once you open the web page (it might take a few seconds to a minute to load depending on your computer), you should see an interface similar to the screenshot below:
 ![homepage](static/UI_homepage.png)
@@ -151,6 +163,10 @@ Files and code involved:
 
 # FAQ
 ## Why bother with non-ASCII input?
+
+**Demo: without and with ASCII-folding**
+
+![without and with ASCII folding](static/UI_ascii_folding.gif)
 
 Our model and BPE tokenizer is train on a very clean corpus, in that the input sentences are all ASCII. This means that, even if we assume English-only input from the user, there might be words with diacritics (e.g. Zoë, façade) that will not be recognized by the tokenizer, and the non-ASCII word will be considered as an out-of-vocabulary token and converted into unknown tokens by the tokenizer.
 
