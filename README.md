@@ -1,5 +1,13 @@
 # Formality Styler
- Web demo for formality classifier (fasttext model) and style rewriter (tranformer model trained with fairseq). Code includes training and deployment.
+Web demo for formality classifier (fasttext model) and style rewriter (tranformer model trained with fairseq). Code includes training and deployment.
+
+This is the Capstone Project for my Master's degree in Computational Linguistics. 
+
+**Documentations:**
+
+The presentation slides for this project can be found [here](https://docs.google.com/presentation/d/1Of4xggftqHpqkNu3ScqmyCKTcWLXGX_xYwy8eH4FVXA/edit?usp=sharing). A conference-proceeding-style writeup that briefly describes the project can be found [here](doc/project_writeup.pdf).
+
+A full list of test set output can be found [here](https://docs.google.com/spreadsheets/d/1IAvSQ_EjUZaAXhmhohLXbTaJTUXgigtiuWhpsCKGo7E/edit?usp=sharing) (available to Brandeis accounts only). The actual presentation was not recorded, but a recording of myself rehearsing is available [here](https://drive.google.com/file/d/1FVtSmmfepF_tAQNSIuBBQ90phF0vdBa5/view?usp=sharing) (available to Brandeis accounts only). 
 
 # How to Run
 ## Prerequisites
@@ -92,7 +100,7 @@ If you wish to change the host port number, do the following:
     ```shell script
     docker run -p <HOST_PORT>:8081 rewriter
     ```
-Now your docker will be up and listening.
+    Now your docker will be up and listening.
 ### Open webpage
 To start the Flask App, simply run
 ```shell script
@@ -166,7 +174,7 @@ To close the port, you'll need to terminate the occupying process:
     $ kill <PID>
     ```
 ## Why use Docker for the classifier?
-Because python-based fastText refuses to install on my local machine... :( 
+Initially, I chose to dockerize the classifier and run it as a server in the docker container, because the python-based fastText refused to install on my local machine... :( 
 
 In the ideal world, we should be able to dockerize the entire project, but ```fairseq-interactive``` does not recognize ```--path```... we'll look into it when time permits.
 > Note: Turns out I had the wrong ```fairseq-interactive``` version and it's incompatible with python 3.9. Maybe we can dockerize the entire project after all.
