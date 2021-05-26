@@ -11,9 +11,10 @@ This is the Capstone Project for my Master's degree in Computational Linguistics
 
 **Documentations**
 
-The presentation slides for this project can be found [here](https://docs.google.com/presentation/d/1Of4xggftqHpqkNu3ScqmyCKTcWLXGX_xYwy8eH4FVXA/edit?usp=sharing). A conference-proceeding-style writeup that briefly describes the project can be found [here](doc/project_writeup.pdf).
-
-A full list of test set output can be found [here](https://docs.google.com/spreadsheets/d/1IAvSQ_EjUZaAXhmhohLXbTaJTUXgigtiuWhpsCKGo7E/edit?usp=sharing) (available to Brandeis accounts only). The actual presentation was not recorded, but a recording of myself rehearsing is available [here](https://drive.google.com/file/d/1FVtSmmfepF_tAQNSIuBBQ90phF0vdBa5/view?usp=sharing) (available to Brandeis accounts only). 
+- [project presentation slides](https://docs.google.com/presentation/d/1Of4xggftqHpqkNu3ScqmyCKTcWLXGX_xYwy8eH4FVXA/edit?usp=sharing): information on background, system overview, result analysis, and deployment
+- [presentation rehearsal recording](https://drive.google.com/file/d/1FVtSmmfepF_tAQNSIuBBQ90phF0vdBa5/view?usp=sharing) (available to Brandeis accounts only): the actual presentation was not recorded, so here's a recording of myself rehearsing
+- [final project writeup](doc/project_writeup.pdf): conference-proceeding-style writeup that briefly describes the project
+- [test set rewrite output](https://docs.google.com/spreadsheets/d/1IAvSQ_EjUZaAXhmhohLXbTaJTUXgigtiuWhpsCKGo7E/edit?usp=sharing) (available to Brandeis accounts only): full list of test output of both the deployed transformer model and a less effective, VAE-based approach
 
 # Training Models
 
