@@ -15,7 +15,14 @@ The presentation slides for this project can be found [here](https://docs.google
 
 A full list of test set output can be found [here](https://docs.google.com/spreadsheets/d/1IAvSQ_EjUZaAXhmhohLXbTaJTUXgigtiuWhpsCKGo7E/edit?usp=sharing) (available to Brandeis accounts only). The actual presentation was not recorded, but a recording of myself rehearsing is available [here](https://drive.google.com/file/d/1FVtSmmfepF_tAQNSIuBBQ90phF0vdBa5/view?usp=sharing) (available to Brandeis accounts only). 
 
+# Training Models
+
+We trained a formality classifier (fasttext model) and two sequence-to-sequence rewrite models (tranformer model trained with fairseq).
+
+Go to [training/](./training) folder to see a detailed documentation for preprocessing, training, and result analysis. 
+
 # How to Run
+
 ## Prerequisites
 To save time, you can execute the following three subsections at the same time. 
 ### Python Packages
