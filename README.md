@@ -132,7 +132,7 @@ If you'd like to specify a port other than 3500, run
 ```shell script
 python app.py --port <port number>
 ```
-go to http://127.0.0.1:/<port number\>/ instead. A Chrome browser is recommended over Safari for a better experience.
+go to http://127.0.0.1:<port number\>/ instead. A Chrome browser is recommended over Safari for a better experience.
 
 Once you open the web page (it might take a few seconds to a minute to load depending on your computer), you should see an interface similar to the screenshot below:
 ![homepage](static/UI_homepage.png)
