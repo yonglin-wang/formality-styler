@@ -1,6 +1,6 @@
 # Formality Styler
 
-An application that can classify user input as formal (e.g. "I find it amusing") or informal (e.g. "lol") and suggest the rewrite in the other direction.
+An application that can classify user input as formal (e.g. "I find it amusing") or informal (e.g. "lol") and suggest the rewrite in the other formality level.
 
 The hope is to provide a tool for ESL students to understand formality and, in general, for every English speaker to achieve effective communication under situations with varying formality requirements.
 
