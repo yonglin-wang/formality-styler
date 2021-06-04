@@ -4,7 +4,7 @@ An application that can classify user input as formal (e.g. "I find it amusing")
 
 The hope is to provide a tool for ESL students to understand formality and, in general, for every English speaker to achieve effective communication under situations with varying formality requirements.
 
-Code includes training for formality classifier (fasttext model) and style rewriter (tranformer model trained with fairseq) and deploying the models via web UI (Flask and Jinja). 
+Code includes training for formality classifier (fasttext model) and style rewriter (tranformer model trained with fairseq) on [Grammarly's Yahoo Answers Formality Corpus (GYAFC)](https://arxiv.org/abs/1803.06535) and deploying the models via web UI (Flask and Jinja). 
 
 This is the Capstone Project for my Master's degree in Computational Linguistics. 
 
