@@ -204,7 +204,7 @@ To close the port, you'll need to terminate the occupying process:
 Initially, I chose to dockerize the classifier and run it as a server in the docker container, because the python-based fastText refused to install on my local machine... :( 
 
 In the ideal world, we should be able to dockerize the entire project, but ```fairseq-interactive``` does not recognize ```--path```... we'll look into it when time permits.
-> Note: Turns out I had the wrong ```fairseq-interactive``` version and it's incompatible with python 3.9. Maybe we can dockerize the entire project after all.
+> Note: Turns out I had the wrong ```fairseq-interactive``` version and it's incompatible with python 3.9. Maybe if we change the python version in the docker image, we can dockerize the entire project after all.
 
 # Acknowledgements
 This project cannot be realized without the generous guidance from Prof. Constantine Lignos. 
