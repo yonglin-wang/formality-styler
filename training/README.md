@@ -62,13 +62,13 @@ training
 │   │   └── tune.informal
 │   ├── fairseq_eval
 │   │   ├── formal_to_informal
-│   │   │   ├── example.informal.detok.output
+│   │   │   ├── example.informal.detok.output (sample output from trained model)
 │   │   │   ├── informal.ref0
 │   │   │   ├── informal.ref1
 │   │   │   ├── informal.ref2
 │   │   │   └── informal.ref3
 │   │   └── informal_to_formal
-│   │       ├── example.formal.detok.output
+│   │       ├── example.formal.detok.output (sample output from trained model)
 │   │       ├── formal.ref0
 │   │       ├── formal.ref1
 │   │       ├── formal.ref2
@@ -81,6 +81,17 @@ training
 
 ```
 
+#### How did you derive the data from the original GYAFC corpus? 
+
+For files under ```data/fairseq_data/``` and ```data/fairseq_eval/```: these files are for training the transformer seq2seq models. To obtain these, simply join the files with the same name together across domain. E.g. ```/corpus/dir/Entertainment_Music/test/formal``` and ```/corpus/dir/Family_Relationships/test/formal``` combine into ```data/fairseq_data/test.formal```.
+
+> Crucially, alignment is important: in ```data/fairseq_data/```, formal and informal files for each split should be aligned line-by-line. In ```data/fairseq_eval/```, the .ref* files under each direction should all align, E.g. the n-th line of all .ref* files under ```data/fairseq_eval/informal_to_formal``` should be variants of the same sentence. 
+
+For files under ```data/ft_data/```: also combined across domains. ```train``` is straightforward, but for ```test``` and ```tune```, this project used only the .ref0 files. 
+
+> Alignment is not required for ```data/ft_data/```. In fact, I shuffled the three splits under ```data/ft_data/``` for the potentially better training result. 
+
+Partial code for generating test sets in ```data/fairseq_eval/``` and all code for generating ```data/ft_data/``` can be found at [fasttext_prep.py](./fasttext_prep.py). Code might contain bugs and you'll need to go into the code and change the first two variables to run the code properly. 
 
 
 ## Training Fasttext Classifier
