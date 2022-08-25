@@ -42,7 +42,7 @@ To obtain the pre-processed datasets for this project, do the following:
 
 1. First, if you haven't already, you'll need to obtain permission to [the original GYAFC dataset](https://github.com/raosudha89/GYAFC-corpus) first
 2. Then contact me for access to the preprocessed data files
-3. Once the access is grated, download the preproseed datasets (```data.zip```) [from this Google Drive link](https://drive.google.com/file/d/1Q9b6dR6bivdB-S-Ot_8Fglk6j_cgEY9v/view?usp=sharing).
+3. Once the access is grated, download the preproseed datasets (```data.zip```) [from this Google Drive link](https://drive.google.com/file/d/1gieJJomKYXsSXBJOhPSnHCfJx1lILlB8/view?usp=sharing).
 4. Extract the file under [training/](./), so that you'll have a new directory: ```training/data```.
 
 ### Dataset Structure
